@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const apiKey = '6f9261f410ea603ecb4d248cf122b2d7';
     const searchButton = document.getElementById('search-button');
     const cityInput = document.getElementById('city-input');
     const currentWeatherSection = document.getElementById('current-weather');
@@ -17,8 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function fetchWeatherData(city) {
-        const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-        const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+        const currentWeatherUrl = `http://localhost:3000/weather/current?city=${city}`;
+        const forecastUrl = `http://localhost:3000/weather/forecast?city=${city}`;
 
         Promise.all([fetch(currentWeatherUrl), fetch(forecastUrl)])
             .then(responses => {
@@ -59,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             previousForecastSection.innerHTML = forecastSection.innerHTML; 
         }
         
-        forecastSection.innerHTML = '<h2>5-Day Forecast Weather</h2>'; 7
+        forecastSection.innerHTML = '<h2>5-Day Forecast Weather</h2>'; 
         
         const forecastList = data.list.filter((item, index) => index % 8 === 0);
         forecastList.forEach(forecast => {
